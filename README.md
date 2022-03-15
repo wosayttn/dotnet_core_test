@@ -56,9 +56,13 @@ Nuvoton MA35D1, Hello World!
 root@ma35d1-som:/opt/dotnet# du -csh  .
 365.3M  .
 365.3M  total
+
+root@ma35d1-som:~/app# du -csh  .
+401.0K  .
+401.0K  total
 ```
 
-# Run hello-world elpased time
+# Run the app Elpased Time
 
 ```bash
 root@ma35d1-som:~/app# time dotnet run
