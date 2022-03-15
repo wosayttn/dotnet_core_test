@@ -62,7 +62,7 @@ root@ma35d1-som:~/app# du -csh  .
 401.0K  total
 ```
 
-# Run the app Elpased Time
+# Elpased time of the app execution
 
 ```bash
 root@ma35d1-som:~/app# time dotnet run
