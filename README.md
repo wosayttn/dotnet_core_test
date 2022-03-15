@@ -39,7 +39,7 @@ root@ma35d1-som:/opt/dotnet# du -csh  .
 
 
 # TEST
-    Try to append "Nuvoton MA35D1" words in string and re-run
+Try to append "Nuvoton MA35D1" words in string and re-run
 
 ```bash
 root@ma35d1-som:~/app# cat Program.cs
