@@ -1,4 +1,3 @@
-
 # INSTALLATION
 
 ```base
@@ -57,4 +56,15 @@ Nuvoton MA35D1, Hello World!
 root@ma35d1-som:/opt/dotnet# du -csh  .
 365.3M  .
 365.3M  total
+```
+
+# Run hello-world elpased time
+
+```bash
+root@ma35d1-som:~/app# time dotnet run
+Nuvoton MA35D1, Hello World!
+
+real    0m22.406s
+user    0m27.991s
+sys     0m2.217s
 ```
