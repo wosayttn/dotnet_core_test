@@ -30,6 +30,14 @@ cd $DOTNET_ROOT"/app"
 dotnet run
 ```
 
+# Installation size
+```bash
+root@ma35d1-som:/opt/dotnet# du -csh  .
+365.3M  .
+365.3M  total
+```
+
+
 # TEST
     Try to append "Nuvoton MA35D1" words in string and re-run
 
