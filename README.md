@@ -71,4 +71,11 @@ Nuvoton MA35D1, Hello World!
 real    0m22.406s
 user    0m27.991s
 sys     0m2.217s
+
+root@ma35d1-som:~/app/bin/Debug/netcoreapp3.1# time dotnet app.dll
+Nuvoton MA35D1, Hello World!
+
+real    0m0.401s
+user    0m0.332s
+sys     0m0.073s
 ```
