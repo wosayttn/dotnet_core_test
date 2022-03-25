@@ -80,7 +80,7 @@ for i in $SDK_SAMPLE; do
   dotnet new $i -o $prj_folder
   cd $prj_folder
   echo `pwd`
-  dotnet build
+  dotnet publish -c Release -r linux-x64 --self-contained
   dotnet publish -c Release -r linux-arm64 --self-contained
   echo "==========================="
   cd $PATH_CURT
