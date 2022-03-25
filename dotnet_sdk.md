@@ -97,7 +97,7 @@ done
 |winforms, winformslib | | error NETSDK1100: Windows is required to build Windows desktop applications. | |
 |worker | Worker Service (Print timestamp) | OK | OK |
 |mstest | | OK | OK |
-|nunit | | OK | |
+|nunit | | Not a executable | |
 |nunit-test | | Not a executable |  |
 |xunit | | Not a executable | |
 |razorcomponent | | Not a executable. | |
