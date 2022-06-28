@@ -1,14 +1,13 @@
 # Requirement
 
 - UBUNTU Linux OS. Please also refer recommanded [docker building script](https://github.com/OpenNuvoton/MA35D1_Docker_Script/tree/master/docker-yocto)
-- MA35D1_Buildroot building
+- [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) root system
 - A SD card
-- balenaEther flash tool
-(<https://github.com/OpenNuvoton/MA35D1_Docker_Script>)
+- [balenaEther](https://www.balena.io/etcher/) flash tool
 
 # Build bootable image for specified MA35D1 board
 
-Please follow the [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) guiding steps to build a bootable image with dotnet-runtim-3.1.26 and flash the image into SD card using [balenaEtcher](https://www.balena.io/etcher/) utility. For example, below commands help you build the bootable image for NuMaker-IoT-MA35D16F70 board is with 128MB main memory size.
+Pleae follow the [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) guiding steps to build a bootable image with dotnet-runtim-3.1.26 and flash the image into SD card using [balenaEtcher](https://www.balena.io/etcher/) utility. For example, below commands help you build the bootable image for NuMaker-IoT-MA35D16F70 board is with 128MB main memory size.
 
 ```base
 # git clone https://github.com/OpenNuvoton/MA35D1_Buildroot
