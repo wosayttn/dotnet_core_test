@@ -1,6 +1,6 @@
 # Requirement
 
-- UBUNTU Linux OS. Please also refer recommanded [docker building script](https://github.com/OpenNuvoton/MA35D1_Docker_Script/tree/master/docker-yocto)
+- UBUNTU Linux OS and [docker building script](https://github.com/OpenNuvoton/MA35D1_Docker_Script/tree/master/docker-yocto) is recommended.
 - [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) root system
 - A SD card
 - [balenaEther](https://www.balena.io/etcher/) flash tool
@@ -80,6 +80,7 @@ Register related environment variables in shell, then run the console_ma35d1 exe
 # cd publish
 # time dotnet console_ma35d1.dll
 Hello, World!
+
 real    0m 0.40s
 user    0m 0.33s
 sys     0m 0.06s
