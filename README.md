@@ -1,81 +1,87 @@
-# INSTALLATION
+# Requirement
+
+- UBUNTU Linux OS. Please also refer recommanded [docker building script](https://github.com/OpenNuvoton/MA35D1_Docker_Script/tree/master/docker-yocto)
+- MA35D1_Buildroot building
+- A SD card
+- balenaEther flash tool
+(<https://github.com/OpenNuvoton/MA35D1_Docker_Script>)
+
+# Build bootable image for specified MA35D1 board
+
+Please follow the [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) guiding steps to build a bootable image with dotnet-runtim-3.1.26 and flash the image into SD card using [balenaEtcher](https://www.balena.io/etcher/) utility. For example, below commands help you build the bootable image for NuMaker-IoT-MA35D16F70 board is with 128MB main memory size.
 
 ```base
-#!/bin/sh
+# git clone https://github.com/OpenNuvoton/MA35D1_Buildroot
+# cd MA35D1_Buildroot
+# make numaker_iot_ma35d16f70_defconfig
+# make menuconfig
+  <Select dotnet-runtime package in menu as below>
 
-DOTNET_CORE_FILE=aspnetcore-runtime-3.1.23-linux-arm64.tar.gz
-DOTNET_SDK_FILE=dotnet-sdk-3.1.417-linux-arm64.tar.gz
-export DOTNET_ROOT=/opt/dotnet
+  Target packages  --->
+      Miscellaneous  --->
+          [*] dotnet-runtime
 
-if [ ! -f "$DOTNET_CORE_FILE" ]; then
-    wget https://download.visualstudio.microsoft.com/download/pr/677b9c58-362a-463b-8e42-c2812d23d782/d6a7a814daf37f40355e5e4e098e1d13/aspnetcore-runtime-3.1.23-linux-arm64.tar.gz
-fi
+  <Save & Exit>
 
-if [ ! -f "$DOTNET_SDK_FILE" ]; then
-    wget https://download.visualstudio.microsoft.com/download/pr/5da6dffe-5c27-4d62-87c7-a3fca48be9bd/967bd7ddc7bbcaef20671175f7b26ee3/dotnet-sdk-3.1.417-linux-arm64.tar.gz
-fi
+# make
+  <Now, you have a coffee time.>
 
-if [ ! -d "$DOTNET_ROOT" ]; then
-    mkdir -p "$DOTNET_ROOT" && tar zxf "$DOTNET_CORE_FILE" -C "$DOTNET_ROOT"
-    mkdir -p "$DOTNET_ROOT" && tar zxf "$DOTNET_SDK_FILE" -C "$DOTNET_ROOT"
-fi
-
-export PATH=$PATH:$DOTNET_ROOT
-
-export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
-
-dotnet new console -o app
-cd $DOTNET_ROOT"/app"
-dotnet run
+# ls output/images/core-image-buildroot-ma35d1-iot-128m.rootfs.sdcard
+  <After done, you will get the MA35D1 Linux image.>
 ```
 
-# TEST
-Try to append "Nuvoton MA35D1" words in string and re-run
+# Cross-compile dotnet project on Linux x64 host
+
+At first, you can download dotnet-install.sh script and execute it to install dotnet sdk in Linux x64 host. Then, create console project and cross-build AARCH64 console execution. Finally, to deploy the outputted 'publish' folder on MA35D1 Linux board over UDISK.
 
 ```bash
-root@ma35d1-som:~/app# cat Program.cs
-using System;
+# wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
+# chmod +x dotnet-install.sh
+...
+...
+...
+dotnet-install: Installation finished successfully.
 
-namespace app
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Nuvoton MA35D1, Hello World!");
-        }
-    }
-}
-root@ma35d1-som:~/app# dotnet run
-Nuvoton MA35D1, Hello World!
+# export PATH=~/.dotnet/:$PATH
+# dotnet --version
+6.0.301
+
+# dotnet new console -o console_ma35d1
+The template "Console App" was created successfully.
+
+Processing post-creation actions...
+Running 'dotnet restore' on /home/wayne/console_ma35d1/console_ma35d1.csproj...
+  Determining projects to restore...
+  Restored /home/wayne/console_ma35d1/console_ma35d1.csproj (in 125 ms).
+Restore succeeded.
+
+# cd console_ma35d1
+
+# dotnet publish -c Release -r linux-arm64 --self-contained
+Microsoft (R) Build Engine version 17.2.0+41abc5629 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  Restored <path/to/console_ma35d1>/console_ma35d1.csproj (in 7.92 sec).
+  console_ma35d1 -> <path/to/console_ma35d1>/bin/Release/net6.0/linux-arm64/console_ma35d1.dll
+  console_ma35d1 -> <path/to/console_ma35d1>/bin/Release/net6.0/linux-arm64/publish/
+
+  <Deploy the 'publish' folder to MA35D1 Linux>
+
 ```
 
-# Installation size
+# Test dotnet application on MA35D1 Linux
+
+Register related environment variables in shell, then run the console_ma35d1 execution in publish.
 
 ```bash
-root@ma35d1-som:/opt/dotnet# du -csh  .
-365.3M  .
-365.3M  total
-
-root@ma35d1-som:~/app# du -csh  .
-401.0K  .
-401.0K  total
-```
-
-# Elpased time of the app execution
-
-```bash
-root@ma35d1-som:~/app# time dotnet run
-Nuvoton MA35D1, Hello World!
-
-real    0m22.406s
-user    0m27.991s
-sys     0m2.217s
-
-root@ma35d1-som:~/app/bin/Debug/netcoreapp3.1# time dotnet app.dll
-Nuvoton MA35D1, Hello World!
-
-real    0m0.401s
-user    0m0.332s
-sys     0m0.073s
+# export DOTNET_ROOT=/usr/share/dotnet-runtime-3.1.26/
+# export PATH=$PATH:$DOTNET_ROOT
+# export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+# cd publish
+# time dotnet console_ma35d1.dll
+Hello, World!
+real    0m 0.40s
+user    0m 0.33s
+sys     0m 0.06s
 ```
