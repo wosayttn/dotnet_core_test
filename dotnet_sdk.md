@@ -1,6 +1,6 @@
 # Build and deploy all dotnet core samples
 
-```base
+```bash
 $ sudo apt-get install npm
 $ dotnet new --list
 Usage: new [options]
@@ -60,7 +60,7 @@ Protocol Buffer File                              proto                         
 
 ```
 
-```base
+```bash
 #!/bin/sh
 
 SDK_SAMPLE="console classlib wpf wpflib wpfcustomcontrollib wpfusercontrollib winforms winformslib worker mstest nunit nunit-test xunit razorcomponent page viewimports viewstart blazorserver web mvc webapp angular react reactredux razorclasslib webapi grpc gitignore globaljson nugetconfig tool-manifest webconfig sln proto"
