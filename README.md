@@ -28,7 +28,7 @@ $ make
 Now, you have a coffee time. After building done, you can get the MA35D1 Linux image in the path.
 
 ```bash
-ls output/images/core-image-buildroot-ma35d1-iot-128m.rootfs.sdcard
+$ ls output/images/core-image-buildroot-ma35d1-iot-128m.rootfs.sdcard
 ```
 
 # Cross-compile dotnet project on Linux x64 host
@@ -38,6 +38,7 @@ At first, you can download dotnet-install.sh script on Microsoft dotnet resource
 ```bash
 $ wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
 $ chmod +x dotnet-install.sh
+$ ./dotnet-install.sh
 ...
 ...
 ...
@@ -51,9 +52,9 @@ $ dotnet new console -o console_ma35d1
 The template "Console App" was created successfully.
 
 Processing post-creation actions...
-Running 'dotnet restore' on /home/wayne/console_ma35d1/console_ma35d1.csproj...
+Running 'dotnet restore' on <path/to/console_ma35d1>/console_ma35d1.csproj...
   Determining projects to restore...
-  Restored /home/wayne/console_ma35d1/console_ma35d1.csproj (in 125 ms).
+  Restored <path/to/console_ma35d1>/console_ma35d1.csproj (in 125 ms).
 Restore succeeded.
 
 $ cd console_ma35d1
