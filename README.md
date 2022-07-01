@@ -13,9 +13,23 @@ Please follow [MA35D1 Development Environment Setup](./dotnet_setup.sh) and the 
 $ git clone https://github.com/OpenNuvoton/MA35D1_Buildroot
 $ cd MA35D1_Buildroot
 $ make numaker_iot_ma35d16f70_defconfig
-$ make menuconfig
-  <Select dotnet-runtime package in menu as below>
+```
 
+If your board is with 512MB DDR memory, to specify corresponding device-tree source file names. Please follow steps as following.
+
+```bash
+$ make menuconfig
+  Bootloaders  --->
+      In-tree Device Tree Source file names (ma35d1-cpu800-wb-128m)  --->
+          (X) ma35d1-cpu800-wb-512m
+
+  <Save & Exit>
+```
+
+Finally, to select dotnet-runtime option in menu as following and start the image building. After done, you should get the MA35D1 Linux image in the path.
+
+```bash
+$ make menuconfig
   Target packages  --->
       Miscellaneous  --->
           [*] dotnet-runtime
@@ -23,12 +37,10 @@ $ make menuconfig
   <Save & Exit>
 
 $ make
-```
 
-Now, you have a coffee time. After building done, you can get the MA35D1 Linux image in the path.
+  <Now, you have a coffee time.>
 
-```bash
-$ ls output/images/core-image-buildroot-ma35d1-iot-128m.rootfs.sdcard
+$ ls output/images/core-image-buildroot-ma35d1-*m.rootfs.sdcard
 ```
 
 # Cross-compile dotnet project on Linux x64 host
