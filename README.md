@@ -10,18 +10,22 @@
 Please follow [MA35D1 Development Environment Setup](./dotnet_setup.sh) and the [MA35D1_Buildroot](https://github.com/OpenNuvoton/MA35D1_Buildroot) guiding steps to build a bootable image with dotnet-runtim-3.1.26 and flash the image into SD card using [balenaEtcher](https://www.balena.io/etcher/) utility. For example, below commands help you build the bootable image for NuMaker-IoT-MA35D16F70 board is with 128MB main memory size.
 
 ```bash
-$ git clone https://github.com/OpenNuvoton/MA35D1_Buildroot
-$ cd MA35D1_Buildroot
-$ make numaker_iot_ma35d16f70_defconfig
+git clone https://github.com/OpenNuvoton/MA35D1_Buildroot
+cd MA35D1_Buildroot
+make numaker_iot_ma35d16f70_defconfig
 ```
 
-If your board is with 512MB DDR memory, to specify corresponding device-tree source file names. Please follow steps as following.
+If your board is with 512MB DDR memory, to specify corresponding device-tree source file names. Please follow these steps as following.
 
 ```bash
 $ make menuconfig
   Bootloaders  --->
       In-tree Device Tree Source file names (ma35d1-cpu800-wb-128m)  --->
           (X) ma35d1-cpu800-wb-512m
+
+  Kernel -->
+      (nuvoton/ma35d1-iot-128m) In-tree Device Tree Source file names
+           < Modify to nuvoton/ma35d1-iot-512m >
 
   <Save & Exit>
 ```
@@ -92,7 +96,6 @@ $ export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 $ cd publish
 $ time dotnet console_ma35d1.dll
 Hello, World!
-
 real    0m 0.40s
 user    0m 0.33s
 sys     0m 0.06s
