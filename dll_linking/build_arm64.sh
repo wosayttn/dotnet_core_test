@@ -1,7 +1,13 @@
 #!/bin/bash
 
-set -x
+set -x -e
 
-aarch64-poky-linux-gcc --sysroot=${SDKTARGETSYSROOT} -g -fPIC -c foo.c
-aarch64-poky-linux-gcc --sysroot=${SDKTARGETSYSROOT} -shared foo.o -o libfoo.so
-aarch64-poky-linux-gcc --sysroot=${SDKTARGETSYSROOT} -g -o main_arm64 main.c -lfoo -L.
+# Remeber to specify the toolchain path and append it to PATH environment variable.
+export PATH=~/MA35D1_Buildroot/output/host/bin/:$PATH
+
+
+aarch64-linux-gcc -v
+
+aarch64-linux-gcc -g -fPIC -c foo.c
+aarch64-linux-gcc -shared foo.o -o libfoo.so
+aarch64-linux-gcc -g -o main_arm64 main.c -lfoo -L.
